@@ -2,10 +2,7 @@
 // that sends a POST request to a specific path on a local server
 export const postMessage = async (path, body) => {
     let data = false; // Variable to store the response data, initialized as false
-    console.log("body", body)
     let payload = JSON.stringify(body); // Convert the request body to a JSON string
-    console.log("payloda", payload)
-
   
     try {
       // Send a POST request to the specified path on the local server

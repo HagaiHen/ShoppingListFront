@@ -11,10 +11,9 @@ export const getAllOrders = async () => {
   };
 
   export const createOrder = async (orderInstance) => {
-    console.log("orederInstance ",orderInstance);
     const orders = await postMessage(`order`, orderInstance).catch(
       (err) => {
-        alert("couldnt get categories" + err.message);
+        alert("couldnt post order" + err.message);
         return false;
       }
     );

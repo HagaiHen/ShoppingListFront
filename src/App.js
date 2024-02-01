@@ -8,7 +8,7 @@ import Home from './Pages/Home';
 function App (props) {
   const [activePage, setActivePage] = useState("Home"); // State to track active page
   const [counter, setCounter] = useState(0);
-  const [productByCategoryList, setProductsByCategoryList] = useState([]);
+  const [productsList, setProductsList] = useState([]);
 
   const handleCompleteClick = () => {
     if (counter > 0) {
@@ -20,7 +20,7 @@ function App (props) {
 
   const handleNavigate = (page) => {
     setCounter(0);
-    setProductsByCategoryList([]);
+    setProductsList([]);
     setActivePage(page);
   }
 
@@ -29,9 +29,9 @@ return (
     {(() => {
       switch (activePage) {
         case "Home":
-          return <Home navigate={handleCompleteClick} setProducts={setProductsByCategoryList} setCounter={setCounter}/>;
+          return <Home navigate={handleCompleteClick} setProducts={setProductsList} setCounter={setCounter}/>;
         case "Complete":
-          return <CompletePage navigate={handleNavigate} products={productByCategoryList}/>;
+          return <CompletePage navigate={handleNavigate} products={productsList}/>;
         default:
           return <div><h1>default</h1></div>;
       }

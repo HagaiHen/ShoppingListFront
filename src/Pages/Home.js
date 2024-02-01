@@ -8,7 +8,6 @@ import TextField from '@mui/material/TextField';
 import { getAllCategories } from '../controllers/CategoryController';
 
 function Home (props) {
-  const [activePage, setActivePage] = useState("Home"); // State to track active page
   const [counter, setCounter] = useState(0);
   const [cleaningCounter, setCleaningCounter] = useState(0);
   const [chessesCounter, setChessesCounter] = useState(0);
@@ -16,7 +15,7 @@ function Home (props) {
   const [meatNfishCounter, setMeatNfishCounter] = useState(0);
   const [pastriesCounter, setPastriesCounter] = useState(0);
   const [currentCategory, setCurrentCategory] = useState({title: "Choose Category..."});
-  const [productByCategoryList, setProductsByCategoryList] = useState([]);
+  const [productsList, setProductsList] = useState([]);
   const [categories, setCategories] = useState([]);
   const [inputText, setInputText] = useState('');
 
@@ -30,12 +29,12 @@ function Home (props) {
 
   const handleAddClick = () => {
     // Check if the product is already in the list
-    const isDuplicate = productByCategoryList.find(item => item.title === inputText && item.category_id === currentCategory.id);
+    const isDuplicate = productsList.find(item => item.title === inputText && item.category_id === currentCategory.id);
     var updatedProduct;
     if (inputText.length > 0) {
     if (!isDuplicate) {
+
       // If not a duplicate, add the product to the list
-      
       switch (currentCategory.id) {
         case 1:
           setCleaningCounter((prevCounter) => prevCounter + 1);
@@ -43,13 +42,13 @@ function Home (props) {
           props.setCounter((prevCounter) => prevCounter + 1);
           updatedProduct = { title: inputText, counter: 1, category_id: 1};
           props.setProducts((prevList) => [...prevList, updatedProduct]);
-          setProductsByCategoryList((prevList) => [...prevList, updatedProduct]);
+          setProductsList((prevList) => [...prevList, updatedProduct]);
           break;
         case 2:
           setChessesCounter((prevCounter) => prevCounter + 1);
           updatedProduct = { title: inputText, counter: 1, category_id: 2 };
           props.setProducts((prevList) => [...prevList, updatedProduct]);
-          setProductsByCategoryList((prevList) => [...prevList, updatedProduct]);
+          setProductsList((prevList) => [...prevList, updatedProduct]);
           setCounter((prevCounter) => prevCounter + 1);
           props.setCounter((prevCounter) => prevCounter + 1);
           break;
@@ -57,7 +56,7 @@ function Home (props) {
           setVegNfruCounter((prevCounter) => prevCounter + 1);
           updatedProduct = { title: inputText, counter: 1 , category_id: 3};
           props.setProducts((prevList) => [...prevList, updatedProduct]);
-          setProductsByCategoryList((prevList) => [...prevList, updatedProduct]);
+          setProductsList((prevList) => [...prevList, updatedProduct]);
           setCounter((prevCounter) => prevCounter + 1);
           props.setCounter((prevCounter) => prevCounter + 1);
           break;
@@ -65,14 +64,14 @@ function Home (props) {
           setMeatNfishCounter((prevCounter) => prevCounter + 1);
           updatedProduct = { title: inputText, counter: 1 , category_id: 4};
           props.setProducts((prevList) => [...prevList, updatedProduct]);
-          setProductsByCategoryList((prevList) => [...prevList, updatedProduct]);
+          setProductsList((prevList) => [...prevList, updatedProduct]);
           setCounter((prevCounter) => prevCounter + 1);
           props.setCounter((prevCounter) => prevCounter + 1);
           break;
         case 5:
           setPastriesCounter((prevCounter) => prevCounter + 1);
           updatedProduct = { title: inputText, counter: 1 , category_id: 5};
-          setProductsByCategoryList((prevList) => [...prevList, updatedProduct]);
+          setProductsList((prevList) => [...prevList, updatedProduct]);
           props.setProducts((prevList) => [...prevList, updatedProduct]);
           setCounter((prevCounter) => prevCounter + 1);
           props.setCounter((prevCounter) => prevCounter + 1);
@@ -81,14 +80,14 @@ function Home (props) {
           alert('Please choose category');
       }
 
-      console.log(productByCategoryList);
+      console.log(productsList);
     } else {
       if (inputText.length > 0) {
-      console.log(productByCategoryList);
+      console.log(productsList);
       // increase the product counter
-      const updatedProducts = productByCategoryList.map((p) =>
+      const updatedProducts = productsList.map((p) =>
       p.title === inputText ? { ...p, counter: p.counter + 1 } : p);
-      setProductsByCategoryList(updatedProducts);
+      setProductsList(updatedProducts);
       props.setProducts(updatedProducts);
       setCounter((prevCounter) => prevCounter + 1);
       props.setCounter((prevCounter) => prevCounter + 1);
@@ -125,6 +124,7 @@ function Home (props) {
 
   };
 
+  // get all categories from database
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -170,7 +170,7 @@ function Home (props) {
                 {category.id === 5 && pastriesCounter}
                 {")"}
                 </CategoryButton>
-                {productByCategoryList      
+                {productsList      
                 .filter(product => product.category_id === category.id)
                 .map(product => (
                 <ProductButton key={category.id}>
