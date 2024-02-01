@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container } from '../styles';
+import { Container, CategoryButton, ProductButton, Card, TopBar, TextFieldBar } from '../styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/esm/Button';
 import TextField from '@mui/material/TextField';
@@ -45,6 +45,24 @@ function CompletePage (props) {
 
   return (
     <Container>
+      
+            <TopBar>
+            <CategoryButton>Order summary</CategoryButton>
+            <Card style={{marginTop: '10px'}}>
+            {props.products.map(product => (
+            
+                
+                
+                <ProductButton>
+                {product.title} {`(${product.counter})`}
+                </ProductButton>
+                
+                           
+            ))}
+            </Card>
+            </TopBar>           
+            
+            <TextFieldBar>
         <TextField 
         style={{width: '300px', marginLeft: '10px'}}
         type="text"
@@ -52,18 +70,19 @@ function CompletePage (props) {
         onChange={handleNameChange}
         placeholder="Full Name..."/>
         <TextField 
-        style={{width: '300px', marginLeft: '10px'}}
+        style={{width: '300px', marginLeft: '10px', marginTop: '10px'}}
         type="text"
         value={_address}
         onChange={handleAddressChange}
         placeholder="Address..."/>
         <TextField 
-        style={{width: '300px', marginLeft: '10px'}}
+        style={{width: '300px', marginLeft: '10px', marginTop: '10px'}}
         type="email"
         value={_email}
         onChange={handleEmailChange}
         placeholder="Email..."/>
-        <Button style={{height: '50px', marginLeft: '10px',}} onClick={() => handleConfirmClick()}>Confirm</Button>
+        <Button style={{height: '50px', marginLeft: '10px', marginTop: '10px', width: '100px'}} onClick={() => handleConfirmClick()}>Confirm</Button>
+        </TextFieldBar>
     </Container>
     );
 }

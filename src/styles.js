@@ -93,3 +93,25 @@ export const CompleteButton = styled.button`
   marginRight: '20px';
   marginLeft: '10px';
 `;
+
+export const TopBar = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 10px; /* Adjust padding as needed */
+  // margin-top: 20%;
+  border-radius: 10px;
+`;
+
+export const TextFieldBar = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 10px; /* Adjust padding as needed */
+  // margin-top: 20%;
+  border-radius: 10px;
+`;

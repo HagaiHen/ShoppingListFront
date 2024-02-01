@@ -19,6 +19,7 @@ function App (props) {
   }
 
   const handleNavigate = (page) => {
+    //clear all fields before navigate to another page
     setCounter(0);
     setProductsList([]);
     setActivePage(page);

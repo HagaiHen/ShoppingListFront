@@ -67,6 +67,8 @@ function Home (props) {
           break;
         default:
           alert('Please choose category');
+          setCounter((prevCounter) => prevCounter - 1);
+          props.setCounter((prevCounter) => prevCounter - 1);
       }
     } else {
       
