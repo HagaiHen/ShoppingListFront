@@ -33,3 +33,13 @@ npm run start
 ```
 
 Visit http://localhost:3000 in your web browser.
+
+
+### Home Page
+
+![image](https://github.com/HagaiHen/ShoppingListFront/assets/76903853/e841fd9b-94c8-474a-a8cb-9b1547579b2a)
+
+### Complete Page
+
+![image](https://github.com/HagaiHen/ShoppingListFront/assets/76903853/905c7814-e19a-43d1-a8ff-6b705eb64df9)
+
