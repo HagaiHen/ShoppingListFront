@@ -45,24 +45,17 @@ function CompletePage (props) {
 
   return (
     <Container>
-      
-            <TopBar>
-            <CategoryButton>Order summary</CategoryButton>
-            <Card style={{marginTop: '10px'}}>
-            {props.products.map(product => (
-            
-                
-                
-                <ProductButton>
-                {product.title} {`(${product.counter})`}
-                </ProductButton>
-                
-                           
-            ))}
-            </Card>
-            </TopBar>           
-            
-            <TextFieldBar>
+      <TopBar>
+        <CategoryButton>Order summary</CategoryButton>
+        <Card style={{marginTop: '10px'}}>
+          {props.products.map(product => (
+          <ProductButton>
+          {product.title} {`(${product.counter})`}
+          </ProductButton>
+          ))}
+        </Card>
+      </TopBar>           
+      <TextFieldBar>
         <TextField 
         style={{width: '300px', marginLeft: '10px'}}
         type="text"

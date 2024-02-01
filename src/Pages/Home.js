@@ -40,6 +40,7 @@ function Home (props) {
     
     // If not a duplicate, add the product to the list
     if (!isDuplicate) {
+      if (currentCategory.id) {
       updatedProduct = { title: inputText, counter: 1, category_id: currentCategory.id };
 
       setProductsList((prevList) => [...prevList, updatedProduct]);
@@ -47,6 +48,7 @@ function Home (props) {
       
       setCounter((prevCounter) => prevCounter + 1);
       props.setCounter((prevCounter) => prevCounter + 1);
+      }
 
       // increment the category counter
       switch (currentCategory.id) {
@@ -67,8 +69,6 @@ function Home (props) {
           break;
         default:
           alert('Please choose category');
-          setCounter((prevCounter) => prevCounter - 1);
-          props.setCounter((prevCounter) => prevCounter - 1);
       }
     } else {
       
