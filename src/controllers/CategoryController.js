@@ -1,4 +1,4 @@
-import { getMessage, postMessage } from "./APIController";
+import { getMessage } from "./APIController";
 
 export const getAllCategories = async () => {
     const categories = await getMessage(`categories`).catch(
