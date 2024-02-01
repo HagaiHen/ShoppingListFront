@@ -16,16 +16,10 @@ To get a copy of this project on your local machine and running, follow these st
 Clone the repository:
 
 ```
-git clone https://github.com/your-username/shopping-list.git
+git clone https://github.com/HagaiHen/ShoppingListFront
 ```
 
-#### Navigate to the project directory:
-
-```
-cd shopping-list
-```
-
-#### Install dependencies:
+### Install dependencies:
 
 ```
 npm install
