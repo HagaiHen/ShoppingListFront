@@ -30,7 +30,7 @@ function Home (props) {
 
   const handleAddClick = () => {
     // Check if the product is already in the list
-    const isDuplicate = productByCategoryList.find(item => item.title === inputText);
+    const isDuplicate = productByCategoryList.find(item => item.title === inputText && item.category_id === currentCategory.id);
     var updatedProduct;
     if (inputText.length > 0) {
     if (!isDuplicate) {
