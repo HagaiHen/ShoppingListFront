@@ -28,67 +28,54 @@ function Home (props) {
 
 
   const handleAddClick = () => {
+    
+    if (inputText.length === 0) {
+      alert("Please fill the name of the product");
+      return;
+    }
+
     // Check if the product is already in the list
     const isDuplicate = productsList.find(item => item.title === inputText && item.category_id === currentCategory.id);
     var updatedProduct;
-    if (inputText.length > 0) {
+    
+    // If not a duplicate, add the product to the list
     if (!isDuplicate) {
+      updatedProduct = { title: inputText, counter: 1, category_id: currentCategory.id };
 
-      // If not a duplicate, add the product to the list
+      setProductsList((prevList) => [...prevList, updatedProduct]);
+      props.setProducts((prevList) => [...prevList, updatedProduct]);
+      
+      setCounter((prevCounter) => prevCounter + 1);
+      props.setCounter((prevCounter) => prevCounter + 1);
+
+      // increment the category counter
       switch (currentCategory.id) {
         case 1:
           setCleaningCounter((prevCounter) => prevCounter + 1);
-          setCounter((prevCounter) => prevCounter + 1);
-          props.setCounter((prevCounter) => prevCounter + 1);
-          updatedProduct = { title: inputText, counter: 1, category_id: 1};
-          props.setProducts((prevList) => [...prevList, updatedProduct]);
-          setProductsList((prevList) => [...prevList, updatedProduct]);
           break;
         case 2:
           setChessesCounter((prevCounter) => prevCounter + 1);
-          updatedProduct = { title: inputText, counter: 1, category_id: 2 };
-          props.setProducts((prevList) => [...prevList, updatedProduct]);
-          setProductsList((prevList) => [...prevList, updatedProduct]);
-          setCounter((prevCounter) => prevCounter + 1);
-          props.setCounter((prevCounter) => prevCounter + 1);
           break;
         case 3:
           setVegNfruCounter((prevCounter) => prevCounter + 1);
-          updatedProduct = { title: inputText, counter: 1 , category_id: 3};
-          props.setProducts((prevList) => [...prevList, updatedProduct]);
-          setProductsList((prevList) => [...prevList, updatedProduct]);
-          setCounter((prevCounter) => prevCounter + 1);
-          props.setCounter((prevCounter) => prevCounter + 1);
           break;
         case 4:
           setMeatNfishCounter((prevCounter) => prevCounter + 1);
-          updatedProduct = { title: inputText, counter: 1 , category_id: 4};
-          props.setProducts((prevList) => [...prevList, updatedProduct]);
-          setProductsList((prevList) => [...prevList, updatedProduct]);
-          setCounter((prevCounter) => prevCounter + 1);
-          props.setCounter((prevCounter) => prevCounter + 1);
           break;
         case 5:
           setPastriesCounter((prevCounter) => prevCounter + 1);
-          updatedProduct = { title: inputText, counter: 1 , category_id: 5};
-          setProductsList((prevList) => [...prevList, updatedProduct]);
-          props.setProducts((prevList) => [...prevList, updatedProduct]);
-          setCounter((prevCounter) => prevCounter + 1);
-          props.setCounter((prevCounter) => prevCounter + 1);
           break;
         default:
           alert('Please choose category');
       }
-
-      console.log(productsList);
     } else {
-      if (inputText.length > 0) {
-      console.log(productsList);
+      
       // increase the product counter
       const updatedProducts = productsList.map((p) =>
       p.title === inputText ? { ...p, counter: p.counter + 1 } : p);
       setProductsList(updatedProducts);
       props.setProducts(updatedProducts);
+
       setCounter((prevCounter) => prevCounter + 1);
       props.setCounter((prevCounter) => prevCounter + 1);
 
@@ -99,11 +86,9 @@ function Home (props) {
       foundProduct.category_id === 3 && setVegNfruCounter((prev) => prev + 1);
       foundProduct.category_id === 4 && setMeatNfishCounter((prev) => prev + 1);
       foundProduct.category_id === 5 && setPastriesCounter((prev) => prev + 1);
-      }
     }
-  } else {
-    alert("please fill the name of the product")
-  }
+    
+    //clear all fields
     setInputText("");
     setCurrentCategory({title: "Choose Category..."});
   }
@@ -120,11 +105,10 @@ function Home (props) {
       setCurrentCategory({ title: "Meat N Fish", id: 4 });
     } else if (category_id === 5) {
       setCurrentCategory({ title: "Pastries", id: 5 });
-    }    
-
+    }
   };
 
-  // get all categories from database
+  // get all categories from the database
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -177,7 +161,6 @@ function Home (props) {
                 {product.title} {`(${product.counter})`}
                 </ProductButton>
                 ))}
-
             </Card>                
             ))}            
             <Button 
